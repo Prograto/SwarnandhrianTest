@@ -18,8 +18,7 @@ function showStaffLogin() {
     document.getElementById('registerForm').classList.add('hidden');
 }
 
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwEqotJwiDjwZTGBoXT9G5WUM6JwTwLjskV0NSutDtmkX-DmDijK8EC8EyS_bxK6bVHA/exec';
-
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwEqotJwiDjwZTGBoXT9G5WUM6JwTwLjskV0NSutDtmkX-DmDijK8EC8EyS_bxK6bVHA/exec'; 
 function studentLogin() {
     var regNo = document.getElementById("studentRegNo").value;
     var password = document.getElementById("studentPassword").value;
