@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz</title>
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/test.css">
+    <link rel="stylesheet" href="./css/scrollbar.css">
+</head>
+<body>
+    <div id="start-container">
+        <p class="sub-font" id = "btn_txt">please wait, Button is in disabled state!</p>
+        <button id="start-button" class="btn">Start Quiz</button>
+    </div>
+<div class="quiz-wrapper">
+    <div class="container">
+        <div class="overall-timer" id="overall-timer">00:00</div>
+        <h2 id = "qlevel">Level: </h2>
+        <div class="question-section" id="question-section"></div>
+
+        <div class="controls">
+            <button class="btn" onclick="prevQuestion()" id="prevBtn">Previous</button>
+            <button class="btn" onclick="nextQuestion()" id="nextBtn">Next</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Questions</h3>
+        <div id="question-numbers"></div>
+        <div class="status-panel">
+            <div class="status-item">Not Answered: <span id="notAnswered">0</span></div>
+            <div class="status-item">Answered: <span id="answered">0</span></div>
+        </div>
+        <div class="submit">
+            <button class="btn" onclick="submitQuiz()">Submit</button>
+        </div>
+        
+    </div>
+</div>
+
+<div class="results" id="results">
+    <h1>Test Finished</h1>
+    <p>Your score: <span id="score">0</span></p>
+    <button class="btn">Back</button>
+    </div>
+</div>
+
+<script>
+    window.footerUrl = "./js/text/footer.txt'";
+</script>
+
+<script src="./js/test.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+</html>

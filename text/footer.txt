@@ -1,0 +1,3 @@
+<footer>
+    <p>Copyright © 2024 <span class="main-font Copyright"><a href="https://github.com/Prograto">ChanduSmartTechtuts</a></span></p>
+</footer>

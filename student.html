@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="./css/student.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/scrollbar.css">
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+<body>
+    <div class="brand sp-font">Swarnandhrian</div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" id="sid"></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Image Slider -->
+    <div class="slider-container">
+        <div class="slider"></div>
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+    </div>
+    <h2 class="main-font">Tests</h2>
+    <!-- Events Section -->
+    <section class="card-container" id="card-container">
+        <!-- Dynamic event cards will be appended here -->
+    </section>
+        
+    </div>
+
+    <!-- Motto -->    
+     <div class="rows">
+        <div class="motto">
+            <div class="h2 main-font">Focus</div>
+            <img src="images/focus.png" alt="">
+        </div>
+        <div>
+            <p class="fan-font">This Web is mainly useful for the Tech Enthusiastics, Who are intrested in learning and this will improve the skills of the the students in many ways like programming, logicala nd resoning skills,mini-projects, etc.</p>
+            <button class = "btn sp-font">Explore</button>
+        </div>
+    </div>
+    
+    <!--footer-->
+    <div id="footer-container"></div>
+
+    <script src="./js/student.js"></script>
+    <script>window.footerUrl = "./text/footer.txt";</script>
+    <script src="./js/footer.js"></script>
+    <script>
+        window.studentId = '{{ student_id }}';
+        // Add the JS code here or reference the external JS file where this code is added
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+/*Footer*/
+footer{
+    background-color: aqua;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+.Copyright{
+    border: 2px dotted rgba(234, 215, 42, 0.893);
+    border-radius: 10px;
+    padding: 2px;
+    background-color: aquamarine;
+    color: #ff7e5f;
+    font-size: larger;
+    cursor: pointer;
+}
