@@ -18,7 +18,7 @@ function showStaffLogin() {
     document.getElementById('registerForm').classList.add('hidden');
 }
 
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbwN2iN-XnHLLwris7NXyLYniyArPdN6b7pb9JVCaYDfkf61itkIMREpncxzTOjP7SYVxw/exec'; // Replace with your deployed web app URL
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwEqotJwiDjwZTGBoXT9G5WUM6JwTwLjskV0NSutDtmkX-DmDijK8EC8EyS_bxK6bVHA/exec';
 
 function studentLogin() {
     var regNo = document.getElementById("studentRegNo").value;
