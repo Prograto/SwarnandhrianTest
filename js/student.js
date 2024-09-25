@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Feteching data or creating upcoming Events
 const Course_Competitor__url = 'https://script.google.com/macros/s/AKfycbwKwbbZPPMhoTL_6Q7jKWwodLmNo5cnsRZ5tRduJqoTE4FkXUokJxml7NXfwYPyk8yxiw/exec'; 
-
+let found = false
 fetch(Course_Competitor__url)
     .then(response => response.json())
     .then(data => {
@@ -92,56 +92,102 @@ fetch(Course_Competitor__url)
     })
     .catch(error => console.error('Error fetching the sheet:', error));
 
+let CompletedSheets = []
 // Update Logical Concepts Function
-function updateLogical(tests) {
+async function updateLogical(tests) {
     const params = new URLSearchParams(window.location.search);
     const regNo = params.get('student_id');
-    const sid =document.getElementById('sid')
-    sid.textContent = regNo
-    console.log(regNo)
+    const sid = document.getElementById('sid');
+    sid.textContent = regNo;
 
     const container = document.getElementById('card-container');
 
-    tests.forEach(sheet => {
-        // Create card element
+    // Store promises for each test
+    const promises = tests.map(async (sheet) => {
         const card = document.createElement('div');
         card.classList.add('card');
 
-        // Card header (Sheet Name)
         const header = document.createElement('div');
         header.classList.add('card-header');
         header.innerText = sheet.sheetName;
 
-        // Card content (Questions and Marks)
         const content = document.createElement('div');
         content.classList.add('card-content');
-        content.innerHTML = `${sheet.questionCount} Questions<br>Marks: ${sheet.totalMarks}`;
+        question_c = document.createElement('p')
+        marks_o = document.createElement('p')
+        marks_o.classList.add(`p-${sheet.sheetName}`)
+        question_c.innerHTML = `${sheet.questionCount} Questions`;
+        marks_o.innerHTML = `Marks: ${sheet.totalMarks}`
+
+        content.appendChild(question_c)
+        content.appendChild(marks_o)
 
         const button = document.createElement('button');
-        button.classList.add('card-button');
+        button.classList.add('btn', 'sp-font');
 
-        if(sheet.state==="ON"){
+        if (sheet.state === "ON") {
+            CompletedSheets.push(sheet.sheetName);
             button.innerText = "Take Test";
-            // Add click event to button to navigate to test.html
+            button.classList.add(`btn-${sheet.sheetName}`);
+
             button.addEventListener('click', () => {
                 const params = new URLSearchParams({
-                    student_id: regNo, // regNo from earlier code
-                    sheet_name: sheet.sheetName // sheet name from the current sheet
+                    student_id: regNo,
+                    sheet_name: sheet.sheetName
                 });
                 window.location.href = `test.html?${params.toString()}`;
             });
-
-        }
-        else{
+        } else {
             button.innerText = "Take Disabled";
         }
 
-        // Add everything to the card
         card.appendChild(header);
         card.appendChild(content);
         card.appendChild(button);
-
-        // Add card to the container
         container.appendChild(card);
+
+        // Send test data and update button state
+        if (CompletedSheets.includes(sheet.sheetName)) {
+            const found = await sendTestData(regNo, sheet.sheetName);
+            console.log("main:",found)
+            console.log("main:",found[0].success)
+            console.log("main:",found[0].marks)
+            console.log("main:",found.length)
+            if (found.length !== 0 && found[0].success) {
+                const button = container.querySelector(`.btn-${sheet.sheetName}`);
+                const p = container.querySelector(`.p-${sheet.sheetName}`);
+                
+                if (button) {
+                    button.innerText = "Test Over";
+                    button.disabled = true;
+                }
+                if(p){
+                    p.innerHTML = `Marks: ${found[0].marks}`
+                }
+            }
+        }
+    });
+
+    // Wait for all promises to resolve
+    await Promise.all(promises);
+}
+
+
+
+function sendTestData(regNo, testName) {
+    console.log('test', testName);
+    const Url = 'https://script.google.com/macros/s/AKfycbxNy5HHWfK_QkGM5xKlPI51UOMNvu6YxtgyNA8O3eYUMJgWjtPHAmxR6jXlkgc1xWyk2g/exec';
+    const payload = {
+        regNo: regNo,
+        testName: testName,
+    };
+    return new Promise((resolve, reject) => {
+        $.post(Url, JSON.stringify(payload), function(response) {
+            resolve(response); // Resolve the promise with the response
+        })
+        .fail(function (xhr, status, error) {
+            console.error('Error:', error);
+            reject(false); // Reject the promise on error
+        });
     });
 }

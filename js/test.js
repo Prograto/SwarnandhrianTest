@@ -17,6 +17,10 @@ start_btn.disabled = true;
 const params = new URLSearchParams(window.location.search);
 const sheetName = params.get('sheet_name');
 const regNo = params.get('student_id');
+
+function home(){
+    window.location.href = `student.html?student_id=${regNo}`
+}
 // Fetch data from Google Sheets
 fetch(scriptUrl, {
     method: 'POST',
@@ -30,7 +34,8 @@ fetch(scriptUrl, {
     .then(data => {
         updateLogical(data);
         qstart_btn.disabled = false;
-        start_txt.textContent = "Click Start!";
+        start_txt.textContent = "Click Start!"
+        console.log("Fetched data",data)
     })
     .catch(error => console.error('Error fetching the sheet:', error));
 
@@ -45,6 +50,8 @@ function updateLogical(data) {
 
     totalQuestions = Object.keys(questions).length;
     totalQuizTime = totalQuestions * 60;
+
+    console.log('Fetched Questions:', questions);
 }
 
 // Function to initialize the quiz
@@ -156,15 +163,6 @@ function submitQuiz() {
 }
 
 
-function restartQuiz() {
-    answeredQuestions.clear();
-    userAnswers = {}; // Clear user answers
-    currentQuestion = 0;
-    document.getElementById('results').style.display = 'none';
-    document.querySelector('.quiz-wrapper').style.display = 'flex';
-    loadQuestions();
-    startOverallTimer();
-}
 
 function startOverallTimer() {
     let totalTime = totalQuizTime;
