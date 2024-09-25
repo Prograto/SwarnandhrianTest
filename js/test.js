@@ -30,8 +30,7 @@ fetch(scriptUrl, {
     .then(data => {
         updateLogical(data);
         qstart_btn.disabled = false;
-        start_txt.textContent = "Click Start!"
-        console.log("Fetched data",data)
+        start_txt.textContent = "Click Start!";
     })
     .catch(error => console.error('Error fetching the sheet:', error));
 
@@ -46,8 +45,6 @@ function updateLogical(data) {
 
     totalQuestions = Object.keys(questions).length;
     totalQuizTime = totalQuestions * 60;
-
-    console.log('Fetched Questions:', questions);
 }
 
 // Function to initialize the quiz
