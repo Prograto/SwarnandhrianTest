@@ -162,7 +162,7 @@ async function updateLogical(tests) {
                     button.disabled = true;
                 }
                 if(p){
-                    p.innerHTML = `Marks: ${found[0].marks}`
+                    p.innerHTML = `Marks Obtained : ${found[0].marks}`
                 }
             }
         }
